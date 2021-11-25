@@ -1,4 +1,4 @@
-import express from 'express';
+import { Request, Response } from 'express';
 import { Article } from '@interfaces/article.interface';
 
 /**
@@ -26,18 +26,17 @@ export const isEmpty = (value: string | number | object): boolean => {
  * @param {String} path
  * @description Saves the article in the database.
  */
-export const saveArticle = (path: string) => {
-  return async (req: express.Request & { article: Article }, res: express.Response) => {
-    const article = req.article;
-    article.title = req.body.title;
-    article.description = req.body.description;
-    article.markdown = req.body.markdown;
-    article.createdAt = req.body.createdAt;
-    try {
-      const new_article: Article = await article.save();
-      res.redirect(`/articles/${new_article.slug}`);
-    } catch (error) {
-      res.render(`articles/${path}`, { article: article });
-    }
-  };
+export const saveArticle = async (path: string, req: Request & { article?: Article }, res: Response) => {
+  console.log(`path: ${path}`);
+  const article = req.article;
+  article.title = req.body.title;
+  article.description = req.body.description;
+  article.markdown = req.body.markdown;
+  article.createdAt = req.body.createdAt;
+  try {
+    const new_article: Article = await article.save();
+    res.redirect(`/articles/${new_article.slug}`);
+  } catch (error) {
+    res.render(`articles/${path}`, { article: article });
+  }
 };
