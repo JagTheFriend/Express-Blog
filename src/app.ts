@@ -7,6 +7,7 @@ import config from 'config';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
+import methodOverride from 'method-override';
 import morgan from 'morgan';
 import { connect, set } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
@@ -58,6 +59,7 @@ class App {
   private initializeMiddlewares() {
     this.app.set('views', path.join(__dirname, '/views'));
     this.app.set('view engine', 'ejs');
+    this.app.use(methodOverride('_method'));
     this.app.use(morgan(config.get('log.format'), { stream }));
     this.app.use(cors({ origin: config.get('cors.origin'), credentials: config.get('cors.credentials') }));
     this.app.use(hpp());
