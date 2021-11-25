@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import Article from '@models/article.model';
+import { Article as ArticleSchema } from '@interfaces/article.interface';
+
+import { saveArticle as saveArticleToDb } from '@utils/util';
 
 // temporary
 // import { Model, Document } from 'mongoose';
@@ -26,12 +29,15 @@ class ArticleController {
     res.render('articles/edit', { article: article });
   };
 
-  public saveArticle = async (req: Request & { article?: {} }, res: Response, next: NextFunction) => {
+  public saveArticle = async (req: Request & { article?: ArticleSchema }, res: Response) => {
     req.article = await Article.findById(req.params.id);
-    next();
+    await saveArticleToDb('edit', req, res);
   };
 
-  public newArticle = (req: Request, res: Response, next: NextFunction) => this.saveArticle(req, res, next);
+  public newArticle = async (req: Request & { article?: ArticleSchema }, res: Response) => {
+    req.article = await Article.findById(req.params.id);
+    await saveArticleToDb('new', req, res);
+  };
   public deleteArticle = async (req: Request, res: Response) => {
     await Article.findByIdAndDelete(req.params.id);
     res.redirect('/');
