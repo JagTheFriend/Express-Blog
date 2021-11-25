@@ -8,5 +8,6 @@ export interface Article {
   markdown: string;
   createdAt: Date;
   slug: string;
-  save: Function;
+  sanitizedHtml: string;
+  save?: Function;
 }
