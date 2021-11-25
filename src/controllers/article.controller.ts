@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
+import Article from '@models/article.model';
 
 // temporary
-import { Model, Document } from 'mongoose';
-declare const Article: Model<Document>;
+// import { Model, Document } from 'mongoose';
+// declare const Article: Model<Document>;
 
 class ArticleController {
   public index = (req: Request, res: Response, next: NextFunction) => {
