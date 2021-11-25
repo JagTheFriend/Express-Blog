@@ -8,6 +8,7 @@ export interface Article {
   description: string;
   markdown: string;
   createdAt: Date;
+  slug: string;
   save: Function;
 }
 
@@ -44,7 +45,7 @@ export const saveArticle = (path: string) => {
     article.markdown = req.body.markdown;
     article.createdAt = req.body.createdAt;
     try {
-      const new_article = await article.save();
+      const new_article: Article = await article.save();
       res.redirect(`/articles/${new_article.slug}`);
     } catch (error) {
       res.render(`articles/${path}`, { article: article });
