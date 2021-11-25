@@ -20,9 +20,20 @@ class BlogController {
     res.render('articles/show', { article: article });
   };
 
-  public editBlog = async (req: Request, res: Response) => {
+  public editArticle = async (req: Request, res: Response) => {
     const article = await Article.findById(req.params.id);
     res.render('articles/edit', { article: article });
+  };
+
+  public saveArticle = async (req: Request & { article?: {} }, res: Response, next: NextFunction) => {
+    req.article = await Article.findById(req.params.id);
+    next();
+  };
+
+  public newArticle = (req: Request, res: Response, next: NextFunction) => this.saveArticle(req, res, next);
+  public deleteArticle = async (req: Request, res: Response) => {
+    await Article.findByIdAndDelete(req.params.id);
+    res.redirect('/');
   };
 }
 
