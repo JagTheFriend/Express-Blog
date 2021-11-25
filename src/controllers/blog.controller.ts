@@ -19,6 +19,11 @@ class BlogController {
     if (article == null) return res.redirect('/');
     res.render('articles/show', { article: article });
   };
+
+  public editBlog = async (req: Request, res: Response) => {
+    const article = await Article.findById(req.params.id);
+    res.render('articles/edit', { article: article });
+  };
 }
 
 export default BlogController;
