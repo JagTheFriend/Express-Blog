@@ -2,7 +2,6 @@ import { Router } from 'express';
 import ArticleController from '@controllers/article.controller';
 import { Routes } from '@interfaces/routes.interface';
 // import authMiddleware from '@middlewares/auth.middleware';
-import { saveArticle } from '@utils/util';
 
 class ArticleRoute implements Routes {
   public path = '/articles';
@@ -19,8 +18,8 @@ class ArticleRoute implements Routes {
     this.router.get(`${this.path}/:slug`, /* authMiddleware, */ this.articleController.slug);
     this.router.get(`${this.path}/edit/:id`, /* authMiddleware, */ this.articleController.editArticle);
 
-    this.router.put(`${this.path}/save/:id`, /* authMiddleware, */ this.articleController.saveArticle, saveArticle('edit'));
-    this.router.post(`${this.path}/`, /* authMiddleware, */ this.articleController.newArticle, saveArticle('new'));
+    this.router.put(`${this.path}/save/:id`, /* authMiddleware, */ this.articleController.saveArticle);
+    this.router.post(`${this.path}/`, /* authMiddleware, */ this.articleController.newArticle);
     this.router.delete(`${this.path}/:id`, /* authMiddleware, */ this.articleController.deleteArticle);
   }
 }
