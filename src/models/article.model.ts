@@ -1,13 +1,8 @@
-import { model, Schema, Document } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { Article } from '@interfaces/article.interface';
 import slugify from 'slugify';
-import createDomPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
+import DOMPurify from 'dompurify';
 const marked = require('marked');
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const dompurify = createDomPurify(new JSDOM().window);
 
 const articleSchema: Schema = new Schema({
   title: {
@@ -35,7 +30,8 @@ const articleSchema: Schema = new Schema({
     required: true,
   },
 });
-const articleModel = model<Article>('User', articleSchema);
+
+const articleModel = model<Article>('Article', articleSchema);
 
 articleSchema.pre<Article>('validate', function (next: Function) {
   if (this.title) {
@@ -43,7 +39,7 @@ articleSchema.pre<Article>('validate', function (next: Function) {
   }
   if (this.markdown) {
     // removes malicious code
-    this.sanitizedHtml = dompurify.sanitize(marked.parse(this.markdown));
+    this.sanitizedHtml = DOMPurify.sanitize(marked.parse(this.markdown));
   }
   next();
 });

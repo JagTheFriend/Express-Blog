@@ -5,7 +5,7 @@ import { Routes } from '@interfaces/routes.interface';
 import { saveArticle } from '@utils/util';
 
 class ArticleRoute implements Routes {
-  public path = '/blog';
+  public path = '/articles';
   public router = Router();
   public articleController = new ArticleController();
 
