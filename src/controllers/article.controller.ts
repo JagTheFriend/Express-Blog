@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Model, Document } from 'mongoose';
 declare const Article: Model<Document>;
 
-class BlogController {
+class ArticleController {
   public index = (req: Request, res: Response, next: NextFunction) => {
     try {
       res.render('articles/new', { article: new Article() });
@@ -37,4 +37,4 @@ class BlogController {
   };
 }
 
-export default BlogController;
+export default ArticleController;

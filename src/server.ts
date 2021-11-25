@@ -6,10 +6,10 @@ import AuthRoute from '@routes/auth.route';
 import IndexRoute from '@routes/index.route';
 import UsersRoute from '@routes/users.route';
 import validateEnv from '@utils/validateEnv';
-import BlogRoute from '@routes/blog.route';
+import ArticleRoute from '@routes/blog.route';
 
 validateEnv();
 
-const app = new App([new IndexRoute(), new UsersRoute(), new AuthRoute(), new BlogRoute()]);
+const app = new App([new IndexRoute(), new UsersRoute(), new AuthRoute(), new ArticleRoute()]);
 
 app.listen();
