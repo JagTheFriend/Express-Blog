@@ -7,7 +7,7 @@ declare const Article: Model<Document>;
 class BlogController {
   public index = (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.render('articles/new');
+      res.render('articles/new', { article: new Article() });
     } catch (error) {
       next(error);
     }
