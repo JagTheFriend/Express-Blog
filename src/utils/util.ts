@@ -1,16 +1,5 @@
 import express from 'express';
-/**
- * @interface Article
- * @description Stores the structure of a article
- */
-export interface Article {
-  title: string;
-  description: string;
-  markdown: string;
-  createdAt: Date;
-  slug: string;
-  save: Function;
-}
+import { Article } from '@interfaces/article.interface';
 
 /**
  * @method isEmpty
