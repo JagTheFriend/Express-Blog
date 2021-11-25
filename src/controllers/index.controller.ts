@@ -1,12 +1,13 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
+import Article from '@models/article.model';
+import { Article as ArticleSchema } from '@interfaces/article.interface';
 
 class IndexController {
-  public index = (req: Request, res: Response, next: NextFunction) => {
-    try {
-      res.sendStatus(200);
-    } catch (error) {
-      next(error);
-    }
+  public index = async (req: Request, res: Response) => {
+    const articles: ArticleSchema[] = await Article.find().sort({
+      createdAt: 'desc',
+    });
+    res.render('articles/index', { articles: articles });
   };
 }
 
