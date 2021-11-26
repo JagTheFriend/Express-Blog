@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, SchemaTypes } from 'mongoose';
 import { Article } from '@interfaces/article.interface';
 
 const articleSchema: Schema = new Schema({
@@ -24,6 +24,10 @@ const articleSchema: Schema = new Schema({
   },
   sanitizedHtml: {
     type: String,
+    required: true,
+  },
+  creator: {
+    type: SchemaTypes.ObjectId,
     required: true,
   },
 });

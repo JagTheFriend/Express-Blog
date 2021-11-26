@@ -11,4 +11,5 @@ export interface Article extends Document {
   createdAt: Date;
   slug: string;
   sanitizedHtml: string;
+  creator: string;
 }
