@@ -21,10 +21,13 @@
                             <%= article.description %>
                         </div>
                         <a href="articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
-                        <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
-                        <form class="d-inline" action="/articles/<%= article.id %>?_method=DELETE" method="POST">
-                            <button type"submit" class="btn btn-danger">Delete</button>
-                        </form>
+
+                        <span id="extra-buttons">
+                            <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+                            <form class="d-inline" action="/articles/<%= article.id %>?_method=DELETE" method="POST">
+                                <button type"submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </span>
                     </div>
                 </div>
                 <% }) %>
@@ -34,5 +37,7 @@
     <script>
         if (document.cookie != "") {
             document.getElementById("buttons").innerHTML = "";
+        } else {
+            document.getElementById("extra-buttons").innerHTML = "";
         }
     </script>

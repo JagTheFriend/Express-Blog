@@ -4,10 +4,6 @@ import { marked } from 'marked';
 import slugify from 'slugify';
 import sanitizeHtml from 'sanitize-html';
 
-// import createPurify from 'dompurify';
-
-// const purify = createPurify();
-
 /**
  * @method isEmpty
  * @param {String | Number | Object} value
