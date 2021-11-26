@@ -4,8 +4,10 @@
         <div class="container">
             <h1 class="mb-4">Blog Articles</h1>
             <a href="/articles" class="btn btn-success">New Article</a>
-            <a href="articles/login" class="btn btn-primary">Login</a>
-            <a href="articles/signup" class="btn btn-info">Sign up</a>
+            <span id="buttons">
+                <a href="articles/login" class="btn btn-primary">Login</a>
+                <a href="articles/signup" class="btn btn-info">Sign up</a>
+            </span>
             <% articles.forEach(article=> { %>
                 <div class="card mt-4">
                     <div class="card-body">
@@ -29,3 +31,8 @@
 
         </div>
     </body>
+    <script>
+        if (document.cookie == "") {
+            document.getElementById("buttons").innerHTML = "";
+        }
+    </script>

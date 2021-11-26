@@ -7,7 +7,12 @@ class IndexController {
     const articles: ArticleSchema[] = await Article.find().sort({
       createdAt: 'desc',
     });
-    res.render('articles/index', { articles: articles });
+    res
+      .set(
+        'Content-Security-Policy',
+        "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'",
+      )
+      .render('articles/index', { articles: articles });
   };
 }
 
