@@ -9,7 +9,7 @@ import { saveArticle as saveArticleToDb } from '@utils/util';
 // declare const Article: Model<Document>;
 
 class Auth {
-  public login = (req: Request, res, Response) => {
+  public login = (req: Request, res: Response) => {
     res
       .set(
         'Content-Security-Policy',
@@ -17,7 +17,7 @@ class Auth {
       )
       .render('auth/login', { signup: false });
   };
-  public signup = (req: Request, res, Response) => {
+  public signup = (req: Request, res: Response) => {
     res
       .set(
         'Content-Security-Policy',
@@ -25,7 +25,7 @@ class Auth {
       )
       .render('auth/login', { signup: true });
   };
-  public logout = (req: Request, res, Response) => {
+  public logout = (req: Request, res: Response) => {
     res.render('auth/logout');
   };
 }
