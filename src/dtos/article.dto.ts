@@ -9,4 +9,7 @@ export class ArticleDto {
 
   @IsString()
   public markdown: string;
+
+  @IsString()
+  public creator: string;
 }
