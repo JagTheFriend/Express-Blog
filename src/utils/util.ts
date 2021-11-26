@@ -37,12 +37,12 @@ export const saveArticle = async (path: string, req: Request & { article?: Artic
   const article = req.article;
   article.title = req.body.title;
   article.description = req.body.description;
-  article.markdown = marked.parse(req.body.markdown);
+  article.markdown = req.body.markdown;
   article.createdAt = req.body.createdAt !== undefined ? req.body.createdAt : Date.now();
 
   article.slug = slugify(article.title, { lower: true, strict: true });
   // article.sanitizedHtml = purify.sanitize(article.markdown);
-  article.sanitizedHtml = sanitizeHtml(article.markdown);
+  article.sanitizedHtml = sanitizeHtml(marked.parse(article.markdown));
 
   try {
     const newArticle: Article | void = await article.save();
