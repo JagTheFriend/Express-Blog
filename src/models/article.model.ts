@@ -1,4 +1,4 @@
-import { model, Schema, Document } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { Article } from '@interfaces/article.interface';
 import slugify from 'slugify';
 import createDomPurify from 'dompurify';
