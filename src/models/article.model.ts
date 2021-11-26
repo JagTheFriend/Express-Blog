@@ -1,8 +1,5 @@
 import { model, Schema } from 'mongoose';
 import { Article } from '@interfaces/article.interface';
-import slugify from 'slugify';
-import DOMPurify from 'dompurify';
-const marked = require('marked');
 
 const articleSchema: Schema = new Schema({
   title: {
@@ -18,7 +15,7 @@ const articleSchema: Schema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: () => Date.now(),
   },
   slug: {
     type: String,
@@ -32,16 +29,4 @@ const articleSchema: Schema = new Schema({
 });
 
 const articleModel = model<Article>('Article', articleSchema);
-
-articleSchema.pre<Article>('validate', function (next: Function) {
-  if (this.title) {
-    this.slug = slugify(this.title, { lower: true, strict: true });
-  }
-  if (this.markdown) {
-    // removes malicious code
-    this.sanitizedHtml = DOMPurify.sanitize(marked.parse(this.markdown));
-  }
-  next();
-});
-
 export default articleModel;
