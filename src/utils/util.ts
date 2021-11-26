@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { Article } from '@interfaces/article.interface';
-import { logger } from '@utils/logger';
 import { marked } from 'marked';
 import slugify from 'slugify';
 import sanitizeHtml from 'sanitize-html';
