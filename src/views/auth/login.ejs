@@ -89,14 +89,34 @@
                     password: password,
                 })
             };
-            var response = await fetch("/signup", options)
+            var response = await fetch("/signup", options);
             var data = await response.json();
             if (response.status >= 400) {
                 alert(data.message.charAt(0).toUpperCase() + data.message.slice(1));
+                return;
             }
+            window.location.href = "/";
         }
         async function login(event) {
             event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            var options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    email: "jagthefriend12@gmail.com"
+                })
+            };
+            var response = await fetch("/signup", options);
+            var data = await response.json();
+            if (response.status >= 400) {
+                alert(data.message.charAt(0).toUpperCase() + data.message.slice(1));
+                return;
+            }
+            window.location.href = "/";
         }
     </script>
 </body>
