@@ -38,6 +38,7 @@ class ArticleController {
     req.article = new Article();
     await saveArticleToDb('new', req, res);
   };
+
   public deleteArticle = async (req: Request, res: Response) => {
     await Article.findByIdAndDelete(req.params.id);
     res.redirect('/');
