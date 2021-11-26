@@ -10,10 +10,20 @@ import { saveArticle as saveArticleToDb } from '@utils/util';
 
 class Auth {
   public login = (req: Request, res, Response) => {
-    res.render('auth/login', { signup: false });
+    res
+      .set(
+        'Content-Security-Policy',
+        "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'",
+      )
+      .render('auth/login', { signup: false });
   };
   public signup = (req: Request, res, Response) => {
-    res.render('auth/login', { signup: true });
+    res
+      .set(
+        'Content-Security-Policy',
+        "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'",
+      )
+      .render('auth/login', { signup: true });
   };
   public logout = (req: Request, res, Response) => {
     res.render('auth/logout');
