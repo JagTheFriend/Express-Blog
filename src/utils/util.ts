@@ -1,5 +1,13 @@
 import { Request, Response } from 'express';
 import { Article } from '@interfaces/article.interface';
+import { logger } from '@utils/logger';
+import { marked } from 'marked';
+import slugify from 'slugify';
+import sanitizeHtml from 'sanitize-html';
+
+// import createPurify from 'dompurify';
+
+// const purify = createPurify();
 
 /**
  * @method isEmpty
@@ -27,15 +35,20 @@ export const isEmpty = (value: string | number | object): boolean => {
  * @description Saves the article in the database.
  */
 export const saveArticle = async (path: string, req: Request & { article?: Article }, res: Response) => {
-  console.log(`path: ${path}`);
   const article = req.article;
   article.title = req.body.title;
   article.description = req.body.description;
-  article.markdown = req.body.markdown;
-  article.createdAt = req.body.createdAt;
+  article.markdown = marked.parse(req.body.markdown);
+  article.createdAt = req.body.createdAt !== undefined ? req.body.createdAt : Date.now();
+
+  article.slug = slugify(article.title, { lower: true, strict: true });
+  // article.sanitizedHtml = purify.sanitize(article.markdown);
+  article.sanitizedHtml = sanitizeHtml(article.markdown);
+
   try {
-    const new_article: Article = await article.save();
-    res.redirect(`/articles/${new_article.slug}`);
+    const newArticle: Article | void = await article.save();
+    console.log(newArticle);
+    res.redirect(`/articles/${path}`);
   } catch (error) {
     res.render(`articles/${path}`, { article: article });
   }
