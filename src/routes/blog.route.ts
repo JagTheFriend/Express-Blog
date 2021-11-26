@@ -19,11 +19,11 @@ class ArticleRoute implements Routes {
     // this.router.get(`${this.path}/new`, this.articleController.newArticle);
 
     this.router.get(`${this.path}/:slug`, this.articleController.slug);
-    this.router.get(`${this.path}/edit/:id`, authMiddleware, validationMiddleware(ArticleDto, 'body', false), this.articleController.editArticle);
+    this.router.delete(`${this.path}/:id`, authMiddleware, this.articleController.deleteArticle);
+    this.router.get(`${this.path}/edit/:id`, authMiddleware, this.articleController.editArticle);
 
     this.router.put(`${this.path}/save/:id`, authMiddleware, validationMiddleware(ArticleDto, 'body', false), this.articleController.saveArticle);
     this.router.post(`${this.path}/`, authMiddleware, validationMiddleware(ArticleDto, 'body', false), this.articleController.createNewArticle);
-    this.router.delete(`${this.path}/:id`, authMiddleware, validationMiddleware(ArticleDto, 'body', false), this.articleController.deleteArticle);
   }
 }
 
