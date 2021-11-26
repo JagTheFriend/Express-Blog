@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import ArticleController from '@controllers/article.controller';
 import { Routes } from '@interfaces/routes.interface';
-// import authMiddleware from '@middlewares/auth.middleware';
+import authMiddleware from '@middlewares/auth.middleware';
 
 class ArticleRoute implements Routes {
   public path = '/articles';
@@ -13,14 +13,15 @@ class ArticleRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, /* authMiddleware, */ this.articleController.index);
-    this.router.get(`${this.path}/new`, /* authMiddleware, */ this.articleController.index);
-    this.router.get(`${this.path}/:slug`, /* authMiddleware, */ this.articleController.slug);
-    this.router.get(`${this.path}/edit/:id`, /* authMiddleware, */ this.articleController.editArticle);
+    this.router.get(`${this.path}`, this.articleController.index);
+    this.router.get(`${this.path}/:slug`, this.articleController.slug);
 
-    this.router.put(`${this.path}/save/:id`, /* authMiddleware, */ this.articleController.saveArticle);
-    this.router.post(`${this.path}/`, /* authMiddleware, */ this.articleController.newArticle);
-    this.router.delete(`${this.path}/:id`, /* authMiddleware, */ this.articleController.deleteArticle);
+    this.router.get(`${this.path}/new`, authMiddleware, this.articleController.index);
+    this.router.get(`${this.path}/edit/:id`, authMiddleware, this.articleController.editArticle);
+
+    this.router.put(`${this.path}/save/:id`, authMiddleware, this.articleController.saveArticle);
+    this.router.post(`${this.path}/`, authMiddleware, this.articleController.newArticle);
+    this.router.delete(`${this.path}/:id`, authMiddleware, this.articleController.deleteArticle);
   }
 }
 
