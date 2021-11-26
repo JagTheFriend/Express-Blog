@@ -107,10 +107,9 @@
                 body: JSON.stringify({
                     username: username,
                     password: password,
-                    email: "jagthefriend12@gmail.com"
                 })
             };
-            var response = await fetch("/signup", options);
+            var response = await fetch("/login", options);
             var data = await response.json();
             if (response.status >= 400) {
                 alert(data.message.charAt(0).toUpperCase() + data.message.slice(1));
