@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Article from '@models/article.model';
 import { Article as ArticleSchema } from '@interfaces/article.interface';
-
 import { saveArticle as saveArticleToDb } from '@utils/util';
 
 // temporary
@@ -26,7 +25,7 @@ class Auth {
       .render('auth/login', { signup: true });
   };
   public logout = (req: Request, res: Response) => {
-    res.render('auth/logout');
+    res.send({ logout: '/logout' });
   };
 }
 

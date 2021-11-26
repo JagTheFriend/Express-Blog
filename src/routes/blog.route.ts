@@ -17,7 +17,7 @@ class ArticleRoute implements Routes {
   private initializeRoutes() {
     this.router.get(`${this.path}/login`, this.articleController.login);
     this.router.get(`${this.path}/signup`, this.articleController.signup);
-    this.router.get(`${this.path}/logout`, this.articleController.logout);
+    this.router.get(`${this.path}/logout`, authMiddleware, this.articleController.logout);
 
     this.router.get(`${this.path}`, authMiddleware, this.articleController.newArticle);
 
