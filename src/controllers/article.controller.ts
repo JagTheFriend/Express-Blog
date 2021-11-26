@@ -35,7 +35,7 @@ class ArticleController {
   };
 
   public newArticle = async (req: Request & { article?: ArticleSchema }, res: Response) => {
-    req.article = await Article.findById(req.params.id);
+    req.article = new Article();
     await saveArticleToDb('new', req, res);
   };
   public deleteArticle = async (req: Request, res: Response) => {
