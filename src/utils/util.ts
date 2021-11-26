@@ -39,9 +39,9 @@ export const saveArticle = async (path: string, req: Request & { article?: Artic
   article.description = req.body.description;
   article.markdown = req.body.markdown;
   article.createdAt = req.body.createdAt !== undefined ? req.body.createdAt : Date.now();
+  article.creator = req.body.creator;
 
   article.slug = slugify(article.title, { lower: true, strict: true });
-  // article.sanitizedHtml = purify.sanitize(article.markdown);
   article.sanitizedHtml = sanitizeHtml(marked.parse(article.markdown));
 
   try {
