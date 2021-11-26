@@ -9,7 +9,7 @@ import { saveArticle as saveArticleToDb } from '@utils/util';
 // declare const Article: Model<Document>;
 
 class ArticleController {
-  public index = (req: Request, res: Response, next: NextFunction) => {
+  public newArticle = (req: Request, res: Response, next: NextFunction) => {
     try {
       res.render('articles/new', { article: new Article() });
     } catch (error) {
@@ -34,7 +34,7 @@ class ArticleController {
     await saveArticleToDb('edit', req, res);
   };
 
-  public newArticle = async (req: Request & { article?: ArticleSchema }, res: Response) => {
+  public createNewArticle = async (req: Request & { article?: ArticleSchema }, res: Response) => {
     req.article = new Article();
     await saveArticleToDb('new', req, res);
   };
