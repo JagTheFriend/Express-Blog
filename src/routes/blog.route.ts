@@ -15,8 +15,11 @@ class ArticleRoute implements Routes {
   }
 
   private initializeRoutes() {
+    this.router.get(`${this.path}/login`, this.articleController.login);
+    this.router.get(`${this.path}/signup`, this.articleController.signup);
+    this.router.get(`${this.path}/logout`, this.articleController.logout);
+
     this.router.get(`${this.path}`, authMiddleware, this.articleController.newArticle);
-    // this.router.get(`${this.path}/new`, this.articleController.newArticle);
 
     this.router.get(`${this.path}/:slug`, this.articleController.slug);
     this.router.delete(`${this.path}/:id`, authMiddleware, this.articleController.deleteArticle);
