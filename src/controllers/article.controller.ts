@@ -8,7 +8,19 @@ import { saveArticle as saveArticleToDb } from '@utils/util';
 // import { Model, Document } from 'mongoose';
 // declare const Article: Model<Document>;
 
-class ArticleController {
+class Auth {
+  public login = (req: Request, res, Response) => {
+    res.render('auth/login', { signup: false });
+  };
+  public signup = (req: Request, res, Response) => {
+    res.render('auth/login', { signup: true });
+  };
+  public logout = (req: Request, res, Response) => {
+    res.render('auth/logout');
+  };
+}
+
+class ArticleController extends Auth {
   public newArticle = (req: Request, res: Response, next: NextFunction) => {
     try {
       res.render('articles/new', { article: new Article() });
