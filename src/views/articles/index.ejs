@@ -67,8 +67,20 @@
             await check(response, "/articles")
         }
 
+        async function logout() {
+            console.log("hi")
+            const response = await fetch("/logout", { method: "POST" });
+            const data = await response.json();
+            document.cookie = "";
+            sessionStorage.removeItem("userName");
+            document.getElementById("buttons").innerHTML = `
+            <a href="articles/login" class="btn btn-primary">Login</a>
+            <a href="articles/signup" class="btn btn-info">Sign up</a>
+            `;
+        }
+
         if (document.cookie != "") {
-            document.getElementById("buttons").innerHTML = "";
+            document.getElementById("buttons").innerHTML = `<button class="btn btn-danger" onclick="logout()">Logout</button>`;
             if (!sessionStorage.getItem("userName")) {
                 const userName = document.cookie.split(" | ")[1].split("=")[1];
                 document.cookie = document.cookie.split(" | ")[0];
