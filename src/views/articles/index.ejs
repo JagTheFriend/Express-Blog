@@ -3,7 +3,7 @@
     <body>
         <div class="container">
             <h1 class="mb-4">Blog Articles</h1>
-            <a href="/articles" class="btn btn-success">New Article</a>
+            <button id="new-article" class="btn btn-success">New Article</button>
             <span id="buttons">
                 <a href="articles/login" class="btn btn-primary">Login</a>
                 <a href="articles/signup" class="btn btn-info">Sign up</a>
@@ -24,8 +24,8 @@
 
                         <span id="extra-buttons">
                             <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
-                            <form class="d-inline" action="/articles/<%= article.id %>?_method=DELETE" method="POST">
-                                <button type"submit" class="btn btn-danger">Delete</button>
+                            <form class="d-inline" onsubmit="(event) => {event.preventDefault(); window.location.href = window.location.href}">
+                                <button type"submit" class="btn btn-danger" onclick="deleteArticle('/articles/<%= article.id %>')">Delete</button>
                             </form>
                         </span>
                     </div>
@@ -35,12 +35,34 @@
         </div>
     </body>
     <script>
+        /**
+         * Deletes an article
+         */
+        async function deleteArticle(url) {
+            var response = await fetch(url, { method: "DELETE" })
+
+        }
+
+        async function createNewArticle() {
+            var response = await fetch("/articles")
+            try {
+                var data = await response.json();
+                sessionStorage.removeItem("userName");
+                window.cookie = "";
+                alert("Please login again");
+                window.location.href = "articles/login";
+            } catch (error) {
+                window.location.href = "/articles"
+            }
+        }
+        document.getElementById("new-article").addEventListener("click", createNewArticle);
+
         if (document.cookie != "") {
             document.getElementById("buttons").innerHTML = "";
-            if (!sessionStorage.getItem("userId")) {
-                const userId = document.cookie.split(" | ")[1].split("=")[1];
+            if (!sessionStorage.getItem("userName")) {
+                const userName = document.cookie.split(" | ")[1].split("=")[1];
                 document.cookie = document.cookie.split(" | ")[0];
-                sessionStorage.setItem("userId", userId)
+                sessionStorage.setItem("userName", userName)
             }
         }
     </script>
