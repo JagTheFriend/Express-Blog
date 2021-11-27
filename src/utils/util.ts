@@ -42,9 +42,8 @@ export const saveArticle = async (path: string, req: Request & { article?: Artic
 
   try {
     const newArticle: Article | void = await article.save();
-    console.log(newArticle);
-    res.redirect(`/articles/${path}`);
+    return res.send({ article: newArticle, error: false });
   } catch (error) {
-    res.render(`articles/${path}`, { article: article });
+    return res.send({ article: article, error: true });
   }
 };
