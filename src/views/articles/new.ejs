@@ -25,7 +25,7 @@
                     title: "title",
                     description: "description",
                     markdown: "# markdown",
-                    creator: sessionStorage.getItem('userId').toString()
+                    creator: sessionStorage.getItem('userName').toString()
                 })
             }
             var response = await fetch("/articles", options)
