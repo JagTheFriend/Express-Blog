@@ -22,9 +22,9 @@
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    title: "title",
+                    title: title,
                     description: "description",
-                    markdown: "# markdown",
+                    markdown: markdown,
                     creator: sessionStorage.getItem('userName').toString()
                 })
             }
