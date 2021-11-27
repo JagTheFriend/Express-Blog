@@ -8,10 +8,10 @@ class IndexController {
       createdAt: 'desc',
     });
     res
-      .set(
-        'Content-Security-Policy',
-        "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'",
-      )
+      // .set(
+      //   'Content-Security-Policy',
+      //   "default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'",
+      // )
       .render('articles/index', { articles: articles });
   };
 }
