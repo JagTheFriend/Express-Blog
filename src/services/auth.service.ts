@@ -33,7 +33,7 @@ class AuthService {
     if (!isPasswordMatching) throw new HttpException(409, "You're password not matching");
 
     const tokenData = this.createToken(findUser);
-    const cookie = this.createCookie(tokenData);
+    const cookie = this.createCookie(tokenData, findUser._id);
 
     return { cookie, findUser };
   }
@@ -55,8 +55,8 @@ class AuthService {
     return { expiresIn, token: jwt.sign(dataStoredInToken, secretKey, { expiresIn }) };
   }
 
-  public createCookie(tokenData: TokenData): string {
-    return `Authorization=${tokenData.token}; Max-Age=${tokenData.expiresIn};`;
+  public createCookie(tokenData: TokenData, userId: string): string {
+    return `Authorization=${tokenData.token} | User-ID=${userId}; Max-Age=${tokenData.expiresIn}`;
   }
 }
 
