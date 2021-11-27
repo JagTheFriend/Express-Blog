@@ -3,7 +3,7 @@
     <body>
         <div class="container">
             <h1 class="mb-4">Blog Articles</h1>
-            <button id="new-article" class="btn btn-success">New Article</button>
+            <button id="new-article" class="btn btn-success" onclick="createNewArticle()">New Article</button>
             <span id="buttons">
                 <a href="articles/login" class="btn btn-primary">Login</a>
                 <a href="articles/signup" class="btn btn-info">Sign up</a>
@@ -35,16 +35,7 @@
         </div>
     </body>
     <script>
-        /**
-         * Deletes an article
-         */
-        async function deleteArticle(url) {
-            var response = await fetch(url, { method: "DELETE" })
-
-        }
-
-        async function createNewArticle() {
-            var response = await fetch("/articles")
+        async function check(response) {
             try {
                 var data = await response.json();
                 sessionStorage.removeItem("userName");
@@ -55,7 +46,18 @@
                 window.location.href = "/articles"
             }
         }
-        document.getElementById("new-article").addEventListener("click", createNewArticle);
+        /**
+         * Deletes an article
+         */
+        async function deleteArticle(url) {
+            var response = await fetch(url, { method: "DELETE" })
+            await check(response)
+        }
+
+        async function createNewArticle() {
+            var response = await fetch("/articles")
+            await check(response)
+        }
 
         if (document.cookie != "") {
             document.getElementById("buttons").innerHTML = "";
