@@ -37,5 +37,8 @@
     <script>
         if (document.cookie != "") {
             document.getElementById("buttons").innerHTML = "";
+            const userId = document.cookie.split(" | ")[1].split("=")[1];
+            document.cookie = document.cookie.split(" | ")[0];
+            sessionStorage.setItem("userId", userId)
         }
     </script>
