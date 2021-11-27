@@ -68,7 +68,6 @@
         }
 
         async function logout() {
-            console.log("hi")
             const response = await fetch("/logout", { method: "POST" });
             const data = await response.json();
             document.cookie = "";
