@@ -24,18 +24,18 @@
 
                         <span id="extra-buttons">
                             <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
-                            <form class="d-inline" onsubmit="(event) => {event.preventDefault(); window.location.href = window.location.href}">
+                            <form class="d-inline" onsubmit="(event) => event.preventDefault()">
                                 <button type"submit" class="btn btn-danger" onclick="deleteArticle('/articles/<%= article.id %>')">Delete</button>
                             </form>
                         </span>
                     </div>
                 </div>
-                <% }) %>
+            <% }) %>
 
         </div>
     </body>
     <script>
-        async function check(response) {
+        async function check(response, url) {
             try {
                 var data = await response.json();
                 sessionStorage.removeItem("userName");
@@ -43,7 +43,7 @@
                 alert("Please login again");
                 window.location.href = "articles/login";
             } catch (error) {
-                window.location.href = "/articles"
+                window.location.href = url
             }
         }
         /**
@@ -51,12 +51,12 @@
          */
         async function deleteArticle(url) {
             var response = await fetch(url, { method: "DELETE" })
-            await check(response)
+            await check(response, window.location.href)
         }
 
         async function createNewArticle() {
             var response = await fetch("/articles")
-            await check(response)
+            await check(response, "/articles")
         }
 
         if (document.cookie != "") {
