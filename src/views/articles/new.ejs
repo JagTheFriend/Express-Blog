@@ -3,8 +3,41 @@
     <body>
         <div class="container">
             <h1 class="mb-4">New Article</h1>
-            <form action="/articles" method="POST">
+            <form id="form">
                 <%- include("_form_fields") %>
             </form>
         </div>
     </body>
+    <script>
+        const form = document.getElementById("form");
+        form.addEventListener("submit", submitNewForm);
+
+        async function submitNewForm(event) {
+            event.preventDefault();
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const markdown = document.getElementById("markdown").value;
+
+            var options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    title: "title",
+                    description: "description",
+                    markdown: "# markdown",
+                    creator: sessionStorage.getItem('userId').toString()
+                })
+            }
+            var response = await fetch("/articles", options)
+            var data = await response.json()
+            if (response.status >= 400) {
+                alert(data.message.charAt(0).toUpperCase() + data.message.slice(1));
+                return;
+            }
+            if (data.error) {
+                alert(`You're title ${title} is already taken, please use a different title`);
+                return;
+            }
+            window.location.href = `/articles/${data.article.slug}`
+        }
+    </script>
