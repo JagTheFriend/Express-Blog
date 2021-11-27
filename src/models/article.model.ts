@@ -27,7 +27,7 @@ const articleSchema: Schema = new Schema({
     required: true,
   },
   creator: {
-    type: SchemaTypes.ObjectId,
+    type: String,
     required: true,
   },
 });
