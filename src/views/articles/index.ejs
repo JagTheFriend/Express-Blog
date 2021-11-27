@@ -22,7 +22,7 @@
                         </div>
                         <a href="articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
 
-                        <span id="extra-buttons">
+                        <span class="creator" id="<%= article.creator %>">
                             <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
                             <form class="d-inline" onsubmit="(event) => event.preventDefault()">
                                 <button type"submit" class="btn btn-danger" onclick="deleteArticle('/articles/<%= article.id %>')">Delete</button>
@@ -35,6 +35,14 @@
         </div>
     </body>
     <script>
+        const userName = sessionStorage.getItem("userName")
+        var spans = document.getElementsByClassName("creator");
+        for (span of spans) {
+            if (span.id != userName) {
+                span.innerHTML = ""
+            }
+        }
+
         async function check(response, url) {
             try {
                 var data = await response.json();
