@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Article } from '@interfaces/article.interface';
+import { logger } from '@utils/logger';
 import { marked } from 'marked';
 import slugify from 'slugify';
 import sanitizeHtml from 'sanitize-html';
@@ -44,6 +45,7 @@ export const saveArticle = async (path: string, req: Request & { article?: Artic
     const newArticle: Article | void = await article.save();
     return res.send({ article: newArticle, error: false });
   } catch (error) {
+    logger.error(error);
     return res.send({ article: article, error: true });
   }
 };
