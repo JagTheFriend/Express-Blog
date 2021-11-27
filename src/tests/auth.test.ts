@@ -15,6 +15,7 @@ describe('Testing Auth', () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
         password: 'q1w2e3r4!',
+        username: 'jag',
       };
 
       const authRoute = new AuthRoute();
@@ -38,6 +39,7 @@ describe('Testing Auth', () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
         password: 'q1w2e3r4!',
+        username: 'jag',
       };
 
       const authRoute = new AuthRoute();

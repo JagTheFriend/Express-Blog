@@ -63,6 +63,7 @@ describe('Testing Users', () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
         password: 'q1w2e3r4',
+        username: 'jag',
       };
 
       const usersRoute = new UsersRoute();
@@ -87,6 +88,7 @@ describe('Testing Users', () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
         password: 'q1w2e3r4',
+        username: 'jag',
       };
 
       const usersRoute = new UsersRoute();
